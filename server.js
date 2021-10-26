@@ -11,6 +11,7 @@ let rollbar = new Rollbar({
 
 
 const app = express()
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
@@ -24,8 +25,7 @@ app.post('/api/student', (req, res) => {
     name = name.trim()
 
     students.push(name)
-    rollbar.log('Student added successfully', {
-        author: 'Scott', type: 'manual entry'})
+    rollbar.log('Student added successfully', {author: 'Scott', type: 'manual entry'})
     res.status(200).send(students)
 })
 
